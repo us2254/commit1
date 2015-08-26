@@ -60,8 +60,8 @@ return array (
     ),
     'default_url' =>
     array (
-      'module' => 'chat',
-      'view' => 'startchat',
+      'module' => 'front',
+      'view' => 'default',
     ),
     'chat' => array(
         'online_timeout' => 300,
@@ -119,8 +119,8 @@ return array (
       	'dir_language' => 'ltr',
         'default_url' =>
         array (
-          'module' => 'chat',
-          'view' => 'startchat',
+          'module' => 'front',
+          'view' => 'default',
         ),
         'theme' =>
         array (
