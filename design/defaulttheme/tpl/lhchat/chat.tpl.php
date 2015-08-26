@@ -70,7 +70,7 @@
 		  	    	    	
 	    </div>
        
-        <textarea class="form-control" rows="4" name="ChatMessage" placeholder="<?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('chat/chat','Enter your message')?>" id="CSChatMessage" class="live-chat-message"></textarea>
+        <textarea class="form-control" rows="4" name="ChatMessage" placeholder="<?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('chat/chat','Enter your message...')?>" id="CSChatMessage" class="live-chat-message"></textarea>
 	    
         <script type="text/javascript">        
         jQuery('#CSChatMessage').bind('keydown', 'return', function (evt){
@@ -117,3 +117,4 @@
     });
 </script>
 <?php endif;?>
+<a href="http://otexconnect.com" target="_blank"><center> <h6 style="font-family:'Comic Sans MS'"> Powered by Otex Connect &copy 2015 </h6> </center> </a>

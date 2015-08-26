@@ -44,7 +44,7 @@
 
 				<div class="col-md-6">
 					<div class="form-group">
-						<label><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('system/htmlcode','Department')?></label> <select id="DepartmentID" multiple="multiple" size="5" class="form-control">
+						<label><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('system/htmlcode','Domains')?></label> <select id="DepartmentID" multiple="multiple" size="5" class="form-control">
 							<option value="0"><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('system/htmlcode','Any');?></option>
 			<?php foreach (erLhcoreClassModelDepartament::getList($departmentParams) as $departament) : ?>
 			    <option value="<?php echo $departament->id?>"><?php echo htmlspecialchars($departament->name)?></option>
