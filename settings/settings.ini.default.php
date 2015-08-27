@@ -4,7 +4,7 @@ return array (
   array (
     'site' =>
     array (
-      'title' => 'Live helper Chat',
+      'title' => 'Otex Connect',
       'site_admin_email' => '',
       'locale' => 'en_EN',
       'theme' => 'defaulttheme',
@@ -14,7 +14,7 @@ return array (
       'templatecache' => false,
       'templatecompile' => false,
       'modulecompile' => false,
-      'force_virtual_host' => false,
+      'force_virtual_host' => true,
       'one_login_per_account' => false,
       'time_zone' => '',
       'date_format' => 'Y-m-d',
@@ -60,8 +60,8 @@ return array (
     ),
     'default_url' =>
     array (
-      'module' => 'chat',
-      'view' => 'startchat',
+      'module' => 'front',
+      'view' => 'default',
     ),
     'chat' => array(
         'online_timeout' => 300,
@@ -119,8 +119,8 @@ return array (
       	'dir_language' => 'ltr',
         'default_url' =>
         array (
-          'module' => 'chat',
-          'view' => 'startchat',
+          'module' => 'front',
+          'view' => 'default',
         ),
         'theme' =>
         array (
