@@ -4,7 +4,7 @@ return array (
   array (
     'site' =>
     array (
-      'title' => 'Otex Connect',
+      'title' => 'Live helper Chat',
       'site_admin_email' => '',
       'locale' => 'en_EN',
       'theme' => 'defaulttheme',
