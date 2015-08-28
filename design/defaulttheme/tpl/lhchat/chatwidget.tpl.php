@@ -2,7 +2,7 @@
 
 <?php if ($disabled_department === true) : ?>
 
-<h1><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('chat/startchat','Domain is disabled');?></h1>
+<h1><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('chat/startchat','Department is disabled');?></h1>
 
 <?php else : ?>
 
@@ -91,15 +91,13 @@ if ($theme !== false && $theme->explain_text != '') : ?>
 <?php $adminCustomFieldsMode = 'on';?>
 <?php include(erLhcoreClassDesign::designtpl('lhchat/part/admin_form_variables.tpl.php'));?>
 
-<img src="/design/defaulttheme/images/general/sa.png" />
-<h6><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('chat/startchat','Hello there, How may i help you ?');?></h6>
-
 <?php if (isset($start_data_fields['message_visible_in_page_widget']) && $start_data_fields['message_visible_in_page_widget'] == true) : ?>
 <?php if (isset($start_data_fields['message_hidden']) && $start_data_fields['message_hidden'] == true) : $hasExtraField = true; ?>
 <textarea class="hide" placeholder="<?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('chat/startchat','Enter your message');?>" name="Question"><?php echo htmlspecialchars($input_data->question);?></textarea>
 <?php else : ?>
 <div class="<?php if (isset($errors['question'])) : ?> has-error<?php endif;?>">
-<textarea id="CSChatMessage" class="form-control form-group <?php if ($hasExtraField !== true && $canReopen !== true) : ?>btrad-reset<?php endif;?>" <?php if (isset($start_data_fields['user_msg_height']) && $start_data_fields['user_msg_height'] > 0) : ?>style="height: <?php echo $start_data_fields['user_msg_height']?>px"<?php endif;?> placeholder="<?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('chat/startchat','Enter your message...');?>" id="id_Question" name="Question"><?php echo htmlspecialchars($input_data->question);?></textarea>
+<?php if (!isset($start_data_fields['hide_message_label']) || $start_data_fields['hide_message_label'] == false) : ?><label class="control-label"><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('chat/startchat','Your question');?><?php if (isset($start_data_fields['message_require_option']) && $start_data_fields['message_require_option'] == 'required') : ?>*<?php endif;?></label><?php endif;?>
+<textarea class="form-control form-group <?php if ($hasExtraField !== true && $canReopen !== true) : ?>btrad-reset<?php endif;?>" <?php if (isset($start_data_fields['user_msg_height']) && $start_data_fields['user_msg_height'] > 0) : ?>style="height: <?php echo $start_data_fields['user_msg_height']?>px"<?php endif;?> placeholder="<?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('chat/startchat','Please enter a message...');?>" id="id_Question" name="Question"><?php echo htmlspecialchars($input_data->question);?></textarea>
 </div>
 <?php endif; ?>
 <?php else : $hasExtraField = true; endif; ?>
@@ -116,11 +114,15 @@ if ($theme !== false && $theme->explain_text != '') : ?>
 <?php include_once(erLhcoreClassDesign::designtpl('lhchat/part/accept_tos.tpl.php'));?>
 
 <?php if ($hasExtraField == true || $canReopen == true) : ?>
-<div class="btn-group" role="group" aria-label="...">
-  <input id="sc1" type="submit" class="btn btn-primary btn-sm" value="<?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('chat/startchat','Start chat');?>" name="StartChatAction" />
-  <?php include(erLhcoreClassDesign::designtpl('lhchat/startchat_button_multiinclude.tpl.php'));?>
-  <?php if ( erLhcoreClassModelChatConfig::fetch('reopen_chat_enabled')->current_value == 1 && ($reopenData = erLhcoreClassChat::canReopenDirectly(array('reopen_closed' => erLhcoreClassModelChatConfig::fetch('allow_reopen_closed')->current_value))) !== false ) : ?>
-  <input type="button" class="btn btn-default btn-sm"  value="<?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('chat/chatnotexists','Resume chat');?>" onclick="document.location = '<?php echo erLhcoreClassDesign::baseurl('chat/reopen')?>/<?php echo $reopenData['id']?>/<?php echo $reopenData['hash']?><?php if ( isset($modeAppend) && $modeAppend != '' ) : ?>/(embedmode)/embed<?php endif;?>'">
+<div class="btn-group" role="group" aria-label="...">  
+  <?php if ($hasExtraField === true) : ?>
+  <?php include(erLhcoreClassDesign::designtpl('lhchat/part/buttons/start_chat_button_widget.tpl.php'));?>
+  <?php endif;?>
+  
+  <?php include(erLhcoreClassDesign::designtpl('lhchat/chatwidget_button_multiinclude.tpl.php'));?>
+  
+  <?php if ( $canReopen == true ) : ?>
+  <?php include(erLhcoreClassDesign::designtpl('lhchat/part/buttons/reopen_button_widget.tpl.php'));?>
   <?php endif; ?>
 </div>
 <?php endif;?>
@@ -130,28 +132,25 @@ if ($theme !== false && $theme->explain_text != '') : ?>
 <input type="hidden" value="<?php echo htmlspecialchars($input_data->operator);?>" name="operator" />
 <input type="hidden" value="1" name="StartChat"/>
 
-    <a href="http://otexconnect.com" target="_blank"><center> <h6 style="font-family:'Comic Sans MS'"> Powered by Otex Connect &copy 2015 </h6> </center> </a>
-
 </form>
 
 <?php include_once(erLhcoreClassDesign::designtpl('lhchat/part/switch_to_offline.tpl.php'));?>
 
-
-<script type="text/javascript">
-// Using jQuery.
-
-$(function() {
-    $('form').each(function() {
-        $(this).find('textarea').keypress(function(e) {
-            // Enter pressed?
-            if(e.which == 10 || e.which == 13) {
-                document.getElementById('sc1').click();
-               
-            }
-        });
-    });
+<?php if ($hasExtraField === false) : ?>
+<script>
+<?php if ($canReopen == false) : ?>
+jQuery('#id_Question').addClass('mb0');
+<?php endif;?>
+var formSubmitted = false;
+jQuery('#id_Question').bind('keydown', 'return', function (evt){
+	if (formSubmitted == false) {
+		formSubmitted = true;
+		$( "#form-start-chat" ).submit();	
+	};
+	return false;
 });
 </script>
+<?php endif;?>
 
 <?php else : ?>
 	<?php if (isset($start_data_fields['show_operator_profile']) && $start_data_fields['show_operator_profile'] == true) : ?>
