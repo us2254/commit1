@@ -10,4 +10,3 @@
 	
 	<?php include(erLhcoreClassDesign::designtpl('lhkernel/csfr_token.tpl.php'));?>
 </form>
-

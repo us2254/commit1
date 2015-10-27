@@ -10,7 +10,7 @@
 echo "Starting chat/workflow\n";
 
 if ( erLhcoreClassModelChatConfig::fetch('run_departments_workflow')->current_value == 1 ) {
-	echo "Starting departments workflow\n";
+	echo "Starting domains workflow\n";
 
 	$ts = time();
 
@@ -25,13 +25,13 @@ if ( erLhcoreClassModelChatConfig::fetch('run_departments_workflow')->current_va
 
 		if ($canExecuteWorkflow == true) {
 			erLhcoreClassChatWorkflow::transferWorkflow($chat);
-			echo "executing department transfer workflow for - ",$chat->id,"\n";
+			echo "executing domain transfer workflow for - ",$chat->id,"\n";
 		} else {
-			echo "Skipping transfer because dedicated department queue is full\n";
+			echo "Skipping transfer because dedicated domain queue is full\n";
 		}
 	}
 
-	echo "Ended departments workflow\n";
+	echo "Ended domains workflow\n";
 }
 
 // Unanswered chats callback

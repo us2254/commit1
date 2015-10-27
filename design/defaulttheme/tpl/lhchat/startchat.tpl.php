@@ -3,7 +3,7 @@
 
 <?php if ($disabled_department === true) : ?>
 
-<h4><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('chat/startchat','Domain is disabled');?></h4>
+<h4><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('chat/startchat','Department is disabled');?></h4>
 
 <?php else : ?>
 
@@ -15,6 +15,8 @@
 <?php endif; ?>
 
 <?php if ($leaveamessage == false || ($forceoffline === false && erLhcoreClassChat::isOnline($department,false,array('ignore_user_status'=> (int)erLhcoreClassModelChatConfig::fetch('ignore_user_status')->current_value, 'online_timeout' => (int)erLhcoreClassModelChatConfig::fetch('sync_sound_settings')->data['online_timeout']))) === true) : ?>
+
+<h4><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('chat/startchat','Fill out this form to start a chat');?></h4>
 
 <form id="form-start-chat" method="post" action="<?php echo erLhcoreClassDesign::baseurl('chat/startchat')?><?php $department !== false ? print '/(department)/'.$department : ''?><?php $input_data->priority !== false ? print '/(priority)/'.$input_data->priority : ''?><?php $input_data->vid !== false ? print '/(vid)/'.htmlspecialchars($input_data->vid) : ''?><?php $input_data->hash_resume !== false ? print '/(hash_resume)/'.htmlspecialchars($input_data->hash_resume) : ''?><?php echo $append_mode_theme?>" onsubmit="return lhinst.addCaptcha('<?php echo time()?>',$(this))">
 
@@ -68,17 +70,13 @@
 <?php $adminCustomFieldsMode = 'on';?>
 <?php include(erLhcoreClassDesign::designtpl('lhchat/part/admin_form_variables.tpl.php'));?>
 
-<h5><b>System Assistant - </b><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('chat/startchat','Hello there, How may i help you ?');?></h5>
-
-<br />
-
 <?php if (isset($start_data_fields['message_visible_in_popup']) && $start_data_fields['message_visible_in_popup'] == true) : ?>
 	<?php if (isset($start_data_fields['message_hidden']) && $start_data_fields['message_hidden'] == true) : ?>
 	<textarea class="hide" placeholder="<?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('chat/startchat','Enter your message');?>" name="Question"><?php echo htmlspecialchars($input_data->question);?></textarea>
 	<?php else : ?>
 	<div class="form-group<?php if (isset($errors['question'])) : ?> has-error<?php endif;?>">
-	   <label class="control-label"><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('chat/startchat','Your question');?><?php if (isset($start_data_fields['message_require_option']) && $start_data_fields['message_require_option'] == 'required') : ?><?php endif;?></label>
-	   <textarea class="form-control" placeholder="<?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('chat/startchat','Type in your message here and press Enter to send');?>" name="Question"><?php echo htmlspecialchars($input_data->question);?></textarea>
+	   <label class="control-label"><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('chat/startchat','Your question');?><?php if (isset($start_data_fields['message_require_option']) && $start_data_fields['message_require_option'] == 'required') : ?>*<?php endif;?></label>
+	   <textarea class="form-control" placeholder="<?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('chat/startchat','Enter your message');?>" name="Question"><?php echo htmlspecialchars($input_data->question);?></textarea>
 	</div>
 	<?php endif; ?>
 <?php endif; ?>
@@ -95,7 +93,7 @@
 <?php include_once(erLhcoreClassDesign::designtpl('lhchat/part/accept_tos.tpl.php'));?>
 
 <div class="btn-group" role="group" aria-label="...">
-  <input id="sc" type="submit" style=" display:none" class="btn btn-primary btn-sm" value="<?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('chat/startchat','Start chat');?>" name="StartChatAction" />
+  <input type="submit" class="btn btn-primary btn-sm" value="<?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('chat/startchat','Start chat');?>" name="StartChatAction" />
   <?php include(erLhcoreClassDesign::designtpl('lhchat/startchat_button_multiinclude.tpl.php'));?>
   <?php if ( erLhcoreClassModelChatConfig::fetch('reopen_chat_enabled')->current_value == 1 && ($reopenData = erLhcoreClassChat::canReopenDirectly(array('reopen_closed' => erLhcoreClassModelChatConfig::fetch('allow_reopen_closed')->current_value))) !== false ) : ?>
   <input type="button" class="btn btn-default btn-sm"  value="<?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('chat/chatnotexists','Resume chat');?>" onclick="document.location = '<?php echo erLhcoreClassDesign::baseurl('chat/reopen')?>/<?php echo $reopenData['id']?>/<?php echo $reopenData['hash']?><?php if ( isset($modeAppend) && $modeAppend != '' ) : ?>/(embedmode)/embed<?php endif;?>'">
@@ -109,25 +107,8 @@
 <input type="hidden" value="1" name="StartChat"/>
 
 <?php include_once(erLhcoreClassDesign::designtpl('lhchat/part/switch_to_offline.tpl.php'));?>
-    <a href="http://otexconnect.com" target="_blank"><center><h6 style="font-family:'Comic Sans MS'"> Powered by Otex Connect &copy 2015 </h6> </center> </a>
+
 </form>
-
-<script type="text/javascript">
-// Using jQuery.
-
-$(function() {
-    $('form').each(function() {
-        $(this).find('textarea').keypress(function(e) {
-            // Enter pressed?
-            if(e.which == 10 || e.which == 13) {
-                document.getElementById('sc').click();
-               
-            }
-        });
-    });
-});
-</script>
-
 <?php else : ?>
 	<h4>
 	<?php if (isset($theme) && $theme !== false && $theme->noonline_operators_offline) : ?>
@@ -137,7 +118,7 @@ $(function() {
 	<?php endif;?>
 	</h4>
 	<?php include(erLhcoreClassDesign::designtpl('lhchat/offline_form_startchat.tpl.php'));?>
-	
+
 <?php endif;?>
 
 <?php endif;?>

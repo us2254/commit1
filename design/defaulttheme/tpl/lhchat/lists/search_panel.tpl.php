@@ -33,10 +33,10 @@
 	<div class="row">
 		<div class="col-md-4">
 		  <div class="form-group">
-				<label><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('chat/lists/search_panel','Department');?></label>
+				<label><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('chat/lists/search_panel','Domain');?></label>
 				<?php echo erLhcoreClassRenderHelper::renderCombobox( array (
 	                    'input_name'     => 'department_id',
-						'optional_field' => erTranslationClassLhTranslation::getInstance()->getTranslation('chat/lists/search_panel','Select department'),
+						'optional_field' => erTranslationClassLhTranslation::getInstance()->getTranslation('chat/lists/search_panel','Select domain'),
 	                    'selected_id'    => $input->department_id,
 				        'css_class'      => 'form-control',				
 	                    'list_function'  => 'erLhcoreClassModelDepartament::getList'

@@ -6,22 +6,26 @@
      		<i class="icon-user icon-assistant"></i>
      	<?php endif;?>
      </div>
-     <div class="pl10">        
-	    <div><strong><?php echo htmlspecialchars($user->name_support)?></strong></div>
+     <div class="pl10">
+	    <div><strong><?php echo htmlspecialchars($user->name_support)?></strong>
+        <?php if ($theme !== false && $theme->logo_image_url != '') : ?>
+            <img class="pull-right"src="<?php echo $theme->logo_image_url?>" alt="" />
+        <?php endif;?>
+      </div>
 	    <?php if (isset($extraMessage)) : ?>
 	    	<i><?php echo $extraMessage;?></i>
 	    <?php endif;?>
-	    
+
 	    <?php include(erLhcoreClassDesign::designtpl('lhchat/part/operator_profile_pre.tpl.php'));?>
-	    
+
 	    <?php if (!isset($hideThumbs) || $hideThumbs == false) : ?>
-     	<i class="icon-thumbs-up<?php if ($chat->fbst == 1) : ?> up-voted<?php endif;?>" data-id="1" onclick="lhinst.voteAction($(this))" ></i>
-     	<i class="icon-thumbs-down<?php if ($chat->fbst == 2) : ?> down-voted<?php endif;?>" data-id="2" onclick="lhinst.voteAction($(this))"></i>
-     	
+     	<i  class="icon-thumbs-up<?php if ($chat->fbst == 1) : ?> up-voted<?php endif;?>" data-id="1" onclick="lhinst.voteAction($(this))" ></i>
+     	<i  class="icon-thumbs-down<?php if ($chat->fbst == 2) : ?> down-voted<?php endif;?>" data-id="2" onclick="lhinst.voteAction($(this))"></i>
+
      	<?php if ($user->skype != '') : ?>
      		<a href="skype:<?php echo htmlspecialchars($user->skype)?>?call" class="icon-skype" title="<?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('chat/part/operator_profile','Skype call'); ?>"></a>
      	<?php endif;?>
-     	
+
      	<?php endif;?>
      	<?php include(erLhcoreClassDesign::designtpl('lhchat/part/operator_profile_post.tpl.php'));?>
      </div>

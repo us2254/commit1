@@ -31,7 +31,7 @@
 </div>
 
 <div class="form-group">
-<label><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('chat/cannedmsg','Department');?></label>		
+<label><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('chat/cannedmsg','Domain');?></label>		
 <?php 
 $params = array (
 		'input_name'     => 'DepartmentID',			

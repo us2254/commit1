@@ -9,7 +9,7 @@
 	<div class="col-xs-3">
 	<?php echo erLhcoreClassRenderHelper::renderCombobox( array (
                     'input_name'     => 'department_map_id',
-					'optional_field' => erTranslationClassLhTranslation::getInstance()->getTranslation('chat/lists/search_panel','Select department'),
+					'optional_field' => erTranslationClassLhTranslation::getInstance()->getTranslation('chat/lists/search_panel','Select domain'),
                     'selected_id'    => $omapDepartment,
 	                'css_class'      => 'form-control input-sm',
                     'list_function'  => 'erLhcoreClassModelDepartament::getList'

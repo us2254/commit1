@@ -4,9 +4,15 @@
 		<div class="row">
 			<div class="col-md-6">
 				<ul>
+
+                  
+
         		    <?php if ($currentUser->hasAccessTo('lhdepartament','list')) : ?>
         		    <li><a href="<?php echo erLhcoreClassDesign::baseurl('departament/departaments')?>"><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('system/configuration','Domains');?></a></li>
         		    <?php endif; ?>
+
+                    <?php include(erLhcoreClassDesign::designtpl('lhsystem/configuration_links/translation.tpl.php'));?>
+        		    
         		   
         		    <?php include(erLhcoreClassDesign::designtpl('lhsystem/configuration_links/blockusers.tpl.php'));?>
         		    
@@ -22,8 +28,7 @@
         		    
         		    <?php endif;?>
         		    		    
-         			<?php include(erLhcoreClassDesign::designtpl('lhsystem/configuration_links/translation.tpl.php'));?>
-        		    
+         			
                     <?php include(erLhcoreClassDesign::designtpl('lhsystem/configuration_links/cannedmsg.tpl.php'));?>
                    
         		    <?php if ($currentUser->hasAccessTo('lhabstract','use')) : ?>

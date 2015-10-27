@@ -11,7 +11,7 @@
 			<table class="table table-condensed mb0 table-small table-fixed">
 				<thead>
 					<tr>
-						<th width="60%"><i title="<?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('chat/syncadmininterface','Department');?>" class="icon-home"></i></th>
+						<th width="60%"><i title="<?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('chat/syncadmininterface','Domain');?>" class="icon-home"></i></th>
 						<th width="20%"><i title="<?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('chat/syncadmininterface','Pending chats');?>" class="icon-comment  chat-pending"></i></th>
 						<th width="20%"><i title="<?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('chat/syncadmininterface','Active chats');?>" class="icon-comment chat-active"></i></th>
 					</tr>
