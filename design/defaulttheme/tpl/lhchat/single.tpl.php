@@ -1,8 +1,8 @@
 <script type="text/javascript">
-	$(function() {
+    $(function() {
             <?php if (is_numeric($chat_id)) : ?>
-            addChat(<?php echo $chat_id;?>,'<?php echo erLhcoreClassDesign::shrt($chat_to_load->nick,10,'...',30,ENT_QUOTES);?>');
-            <?php endif; ?>
+	    addChat(<?php echo $chat_id;?>,'<?php echo erLhcoreClassDesign::shrt($chat_to_load->nick,10,'...',30,ENT_QUOTES);?>');
+	    <?php endif; ?>
 	});
 </script>
 
@@ -15,11 +15,11 @@
 </div>
 
 <script type="text/javascript">
-function addChat(chat_id,name)
-{
-	lhinst.setCloseWindowOnEvent(true);
-	lhinst.setDisableRemember(true);
-    lhinst.startChat(chat_id,$('#tabs'),name);
-    window.focus();
-}
+    function addChat(chat_id,name)
+    {
+        lhinst.setCloseWindowOnEvent(true);
+        lhinst.setDisableRemember(true);
+        lhinst.startChat(chat_id,$('#tabs'),name);
+        window.focus();
+    }
 </script>

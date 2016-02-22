@@ -303,7 +303,7 @@ class erLhcoreClassChat {
 	      }
 
 	      $objects = $session->find( $q );
-
+          
 	      return $objects;
     }
 

@@ -1,5 +1,8 @@
+
 <?php
+
 $departmentNames = array();
+$_SESSION['var'] = 1;
 $departmentList = array();
 $departments = erLhcoreClassModelDepartament::getList($departmentParams);
 
@@ -16,8 +19,10 @@ $dashboardOrder = explode('|', erLhcoreClassModelChatConfig::fetch('dashboard_or
 $columnsTotal = count($dashboardOrder);
 $columnSize = 12 / $columnsTotal;
 
+
 ?>
-<div class="row" id="dashboard-body" ng-init='lhc.userDepartments=<?php echo json_encode($departmentList,JSON_HEX_APOS)?>;lhc.userDepartmentsNames=<?php echo json_encode($departmentNames,JSON_HEX_APOS)?>;lhc.setUpListNames(["actived","closedd","unreadd","pendingd","operatord","departmentd"])'>
+
+<div class="row"  ng-init='lhc.userDepartments=<?php echo json_encode($departmentList,JSON_HEX_APOS)?>;lhc.userDepartmentsNames=<?php echo json_encode($departmentNames,JSON_HEX_APOS)?>;lhc.setUpListNames(["actived","closedd","unreadd","pendingd","operatord","departmentd"])'>
      <?php for ($i = 0; $i < $columnsTotal; $i++) : $widgets = explode(',', $dashboardOrder[$i]); ?>
         <div class="col-md-<?php echo $columnSize?>">
             <?php foreach ($widgets as $wiget) : ?>
@@ -71,6 +76,11 @@ $columnSize = 12 / $columnsTotal;
         </div>
      <?php endfor;?>
 </div>
+
+
+
+ 
+
 
 <?php $popoverInitialized = true; ?>
 <script>

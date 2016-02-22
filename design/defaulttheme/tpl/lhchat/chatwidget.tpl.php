@@ -17,7 +17,58 @@
 
 <?php if ($leaveamessage == false || ($forceoffline === false && erLhcoreClassChat::isOnline($department, false, array('ignore_user_status'=> (int)erLhcoreClassModelChatConfig::fetch('ignore_user_status')->current_value, 'online_timeout' => (int)erLhcoreClassModelChatConfig::fetch('sync_sound_settings')->data['online_timeout'])) === true)) : ?>
 
-<img src=<?php echo erLhcoreClassDesign::design('images/general/sa.png');?> />
+<!--first chat window-->
+    <div class="operator-info float-break">
+	             <div class="pl10">
+	        <div><strong>
+
+<?php
+
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "lhc";
+
+$connection=mysql_connect ("localhost", $username, $password);
+if (!$connection) {
+    die('Not connected : ' . mysql_error());
+}
+$db_selected = mysql_select_db($dbname, $connection);
+if (!$db_selected) {
+    die ('Can\'t use db : ' . mysql_error());
+}
+
+$query = sprintf("SELECT name, filepath, filename FROM lh_users join lh_userdep on lh_userdep.user_id = lh_users.id WHERE lh_userdep.last_activity != 0");
+
+$result = mysql_query($query);
+
+while($row = mysql_fetch_assoc($result)): ?>
+         <tr>
+        
+        <?php if($row["filename"] == '') : ?>
+
+
+             <div class="pull-left pr5">
+
+     		    <i class="icon-user icon-assistant"></i>
+
+         </div>
+        <?php else :?>
+             <img src="http://localhost:57738/<?php echo $row["filepath"] . $row["filename"]?>"   />
+
+             <?php endif; ?>
+        <td><?php echo $row["name"]?></td>
+
+    </tr>
+    
+<?php 
+endwhile;
+?>
+	            </strong>
+           </div>
+        </div>
+    </div>
+<!--end of first chat window-->
 <?php if (isset($start_data_fields['show_operator_profile']) && $start_data_fields['show_operator_profile'] == true) : ?>
 <?php include_once(erLhcoreClassDesign::designtpl('lhchat/part/operator_profile_start_chat.tpl.php'));?>
 <?php endif;?>
@@ -93,15 +144,17 @@ if ($theme !== false && $theme->explain_text != '') : ?>
 <br>
 <br>
 <br>
+<br />
+<br />
 
 <?php $adminCustomFieldsMode = 'on';?>
 <?php include(erLhcoreClassDesign::designtpl('lhchat/part/admin_form_variables.tpl.php'));?>
 <?php if (isset($start_data_fields['message_visible_in_page_widget']) && $start_data_fields['message_visible_in_page_widget'] == true) : ?>
 <?php if (isset($start_data_fields['message_hidden']) && $start_data_fields['message_hidden'] == true) : $hasExtraField = true; ?>
-<textarea class="hide" placeholder="<?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('chat/startchat','Enter your message');?>" name="Question"><?php echo htmlspecialchars($input_data->question);?></textarea>
+<textarea class="hide" placeholder="<?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('chat/startchat','Enter your message');?>" name="Question">Wajj oy</textarea>
 <?php else : ?>
 <div class="<?php if (isset($errors['question'])) : ?> has-error<?php endif;?>">
-<textarea class="form-control form-group <?php if ($hasExtraField !== true && $canReopen !== true) : ?>btrad-reset<?php endif;?>" <?php if (isset($start_data_fields['user_msg_height']) && $start_data_fields['user_msg_height'] > 0) : ?>style="height: <?php echo $start_data_fields['user_msg_height']?>px"<?php endif;?> placeholder="<?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('chat/startchat','Type in your message here and press Enter to send');?>" id="id_Question" name="Question"><?php echo htmlspecialchars($input_data->question);?></textarea>
+<textarea class="form-control form-group <?php if ($hasExtraField !== true && $canReopen !== true) : ?>btrad-reset<?php endif;?>" <?php if (isset($start_data_fields['user_msg_height']) && $start_data_fields['user_msg_height'] > 0) : ?>style="height: <?php echo $start_data_fields['user_msg_height']?>px"<?php endif;?> placeholder="<?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('chat/startchat','Type in your message here and press Enter to send');?>" id="id_Question" name="Question"></textarea>
 </div>
 <?php endif; ?>
 <?php else : $hasExtraField = true; endif; ?>
@@ -143,16 +196,16 @@ if ($theme !== false && $theme->explain_text != '') : ?>
 <?php if ($hasExtraField === false) : ?>
 <script>
 <?php if ($canReopen == false) : ?>
-jQuery('#id_Question').addClass('mb0');
+    jQuery('#id_Question').addClass('mb0');
 <?php endif;?>
-var formSubmitted = false;
-jQuery('#id_Question').bind('keydown', 'return', function (evt){
-	if (formSubmitted == false) {
-		formSubmitted = true;
-		$( "#form-start-chat" ).submit();
-	};
-	return false;
-});
+    var formSubmitted = false;
+    jQuery('#id_Question').bind('keydown', 'return', function (evt) {
+        if (formSubmitted == false) {
+            formSubmitted = true;
+            $("#form-start-chat").submit();
+        };
+        return false;
+    });
 </script>
 <?php endif;?>
 

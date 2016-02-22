@@ -1,36 +1,63 @@
-<?php
+<?php include(erLhcoreClassDesign::designtpl('lhfront/online_chat_enabled_pre.tpl.php')); 
 
-$tpl = erLhcoreClassTemplate::getInstance( 'lhdepartament/departaments.tpl.php');
+      
+      if($_POST['inpu'] == 1){
+          $_SESSION['var'] = 1;
+          
+          
+            $tpl = erLhcoreClassTemplate::getInstance( 'lhdepartament/departaments.tpl.php');
 
-/**
- * Append user departments filter
- * */
-$departmentParams = array();
-if ($currentUser->hasAccessTo('lhdepartment','manageall') !== true)
-{
-    $userDepartments = erLhcoreClassUserDep::parseUserDepartmetnsForFilter($currentUser->getUserID());
-    if ($userDepartments !== true){
-    	$departmentParams['filterin']['id'] = $userDepartments;
-    }
-}
+            /**
+             * Append user departments filter
+             * */
+            $departmentParams = array();
+            if ($currentUser->hasAccessTo('lhdepartment','manageall') !== true)
+            {
+                $userDepartments = erLhcoreClassUserDep::parseUserDepartmetnsForFilter($currentUser->getUserID());
+                if ($userDepartments !== true){
+                    $departmentParams['filterin']['id'] = $userDepartments;
+                }
+            }
 
-$pages = new lhPaginator();
-$pages->serverURL = erLhcoreClassDesign::baseurl('departament/departaments');
-$pages->items_total = erLhcoreClassModelDepartament::getCount($departmentParams);
-$pages->setItemsPerPage(20);
-$pages->paginate();
+            $pages = new lhPaginator();
+            $pages->serverURL = erLhcoreClassDesign::baseurl('departament/departaments');
+            $pages->items_total = erLhcoreClassModelDepartament::getCount($departmentParams);
+            $pages->setItemsPerPage(20);
+            $pages->paginate();
 
-$items = array();
-if ($pages->items_total > 0) {
-    $items = erLhcoreClassModelDepartament::getList(array_merge($departmentParams,array('offset' => $pages->low, 'limit' => $pages->items_per_page,'sort' => 'id ASC')));
-}
+            $items = array();
+            if ($pages->items_total > 0) {
+                $items = erLhcoreClassModelDepartament::getList(array_merge($departmentParams,array('offset' => $pages->low, 'limit' => $pages->items_per_page,'sort' => 'id ASC')));
+            }
 
-$tpl->set('items',$items);
-$tpl->set('pages',$pages);
+            $tpl->set('items',$items);
+            $tpl->set('pages',$pages);
 
-$Result['content'] = $tpl->fetch();
-$Result['path'] = array(
-array('url' => erLhcoreClassDesign::baseurl('system/configuration'),'title' => erTranslationClassLhTranslation::getInstance()->getTranslation('department/departments','System configuration')),
-array('url' => erLhcoreClassDesign::baseurl('department/departments'),'title' => erTranslationClassLhTranslation::getInstance()->getTranslation('department/departments','Domains')))
+            $Result['content'] = $tpl->fetch();
+            $Result['path'] = array(
+            array('url' => erLhcoreClassDesign::baseurl('system/configuration'),'title' => erTranslationClassLhTranslation::getInstance()->getTranslation('department/departments','System configuration')),
+            array('url' => erLhcoreClassDesign::baseurl('department/departments'),'title' => erTranslationClassLhTranslation::getInstance()->getTranslation('department/departments','Domains')));
+      
+      }
+      
+           if($_POST['inpu'] == 2){
+               
+           $_SESSION['var'] = 2;
 
+            $tpl = erLhcoreClassTemplate::getInstance( 'lhdepartament/departaments.tpl.php');
+
+            $departmentParams = array();
+
+            $items = array();
+            $items = erLhcoreClassModelDepartament::getListTips();
+
+            $tpl->set('items',$items);
+            
+            $Result['content'] = $tpl->fetch();
+            $Result['path'] = array(
+            array('url' => erLhcoreClassDesign::baseurl('system/configuration'),'title' => erTranslationClassLhTranslation::getInstance()->getTranslation('departament/departaments','System configuration')),
+            array('url' => erLhcoreClassDesign::baseurl('departament/departaments'),'title' => erTranslationClassLhTranslation::getInstance()->getTranslation('departament/departaments','Tips')));
+
+            }
+           
 ?>

@@ -1,18 +1,36 @@
 <?php include(erLhcoreClassDesign::designtpl('lhsystem/configuration_tabs_content/chat_pre.tpl.php'));?>
+ <?php  include(erLhcoreClassDesign::designtpl('lhfront/online_chat_enabled_pre.tpl.php')); 
+       ?>
 <?php if ($system_configuration_tabs_content_chat_enabled == true && $currentUser->hasAccessTo('lhchat','use')) : ?>
 <div role="tabpanel" class="tab-pane" id="chatconfiguration">
 		<div class="row">
 			<div class="col-md-6">
+                    <a   href="<?php echo erLhcoreClassDesign::designtpl('lhfaq/embedcode.tpl.php')?>"> 
+                       
+                    </a>
 				<ul>
 
+                    <form id="form1" method="post" action="<?php echo erLhcoreClassDesign::baseurl('departament/departaments')?>"> 
+                        <input hidden="true" name="inpu" value="1"/>
+                    </form>
                   
 
+
+                    <form id="form3" method="post" action="<?php echo erLhcoreClassDesign::baseurl('faq/departaments')?>">
+                        <input hidden="true" name="inpu" value="3" />
+                    </form>
+
+                     <form id="form4" method="post" action="<?php echo erLhcoreClassDesign::baseurl('faq/departaments')?>">
+                        <input hidden="true" name="inpu" value="4" />
+                    </form>
+
         		    <?php if ($currentUser->hasAccessTo('lhdepartament','list')) : ?>
-        		    <li><a href="<?php echo erLhcoreClassDesign::baseurl('departament/departaments')?>"><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('system/configuration','Domains');?></a></li>
+        		    <li><a id = "depid" ><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('system/configuration','Domains');?></a></li>
         		    <?php endif; ?>
 
-                    <?php include(erLhcoreClassDesign::designtpl('lhsystem/configuration_links/translation.tpl.php'));?>
-        		    
+        		    <li><a id="tipsid">Tips</a></li>
+                    <li><a id="teamid">Team</a></li>
+                    <li><a id="adid">Ads</a></li>
         		   
         		    <?php include(erLhcoreClassDesign::designtpl('lhsystem/configuration_links/blockusers.tpl.php'));?>
         		    
@@ -62,3 +80,29 @@
 <?php endif;?>
     
     
+<script>
+
+    var tips = document.getElementById("tipsid");
+    var dep = document.getElementById("depid");
+    var team = document.getElementById("teamid");
+    var ad = document.getElementById("adid");
+    var click = 0;
+
+
+    dep.onclick = function () {
+
+        $('#form1').submit();
+    }
+    tips.onclick = function () {
+        $('#form2').submit();
+    }
+    team.onclick = function () {
+        $('#form3').submit();
+    }
+    ad.onclick = function () {
+
+        $('#form4').submit();
+    }
+
+
+</script>

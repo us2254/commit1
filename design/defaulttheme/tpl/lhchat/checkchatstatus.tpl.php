@@ -20,16 +20,31 @@
     </h4>
     <?php elseif ($is_online == true) : ?>
      
-    <h4>
-         <?php if ($chat->number_in_queue > 1) : ?><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('chat/checkchatstatus','You are number')?> <b><?php echo $chat->number_in_queue?></b> <?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('chat/checkchatstatus','in the queue. Please wait...')?>
-         <?php else : ?>
-             <?php if ($theme !== false  && $theme->pending_join != '') : ?>
-        	   <?php echo htmlspecialchars($theme->pending_join)?>
-        	<?php else : ?>
-               <?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('chat/checkchatstatus','Pending a support staff member to join, you can write your questions, and as soon as a support staff member confirms this chat, he will get your messages'); ?>
+<!--second chat window-->
+    <div class="operator-info float-break">
+	    <div class="pull-left pr5">
+
+     		    <i class="icon-user icon-assistant"></i>
+
+         </div>
+         <div class="pl10">
+	        <div><strong>La haola wala</strong>
+            <?php if ($theme !== false && $theme->logo_image_url != '') : ?>
+                <img class="pull-right"src="<?php echo $theme->logo_image_url?>" alt="" />
             <?php endif;?>
-        <?php endif;?>
-    </h4>
+          </div>
+	
+
+	        <?php if (!isset($hideThumbs) || $hideThumbs == false) : ?>
+     	    <i  class="icon-thumbs-up"></i>
+     	    <i  class="icon-thumbs-down"></i>
+
+     	    <?php endif;?>
+
+         </div>
+    </div>
+<!--end of second chat window-->
+
    
     <?php else : ?>
     <h4>

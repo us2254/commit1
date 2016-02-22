@@ -3,9 +3,11 @@
 <html lang="<?php echo erConfigClassLhConfig::getInstance()->getDirLanguage('content_language')?>" dir="<?php echo erConfigClassLhConfig::getInstance()->getDirLanguage('dir_language')?>" ng-app="lhcApp">
 	<head>
 		<?php include_once(erLhcoreClassDesign::designtpl('pagelayouts/parts/page_head.tpl.php'));?>
+        
 	</head>
-<body ng-controller="LiveHelperChatCtrl as lhc">
+<body id="cont" ng-controller="LiveHelperChatCtrl as lhc">
 
+    
 <?php include_once(erLhcoreClassDesign::designtpl('pagelayouts/parts/top_menu.tpl.php'));?>
 
 <div class="container-fluid">

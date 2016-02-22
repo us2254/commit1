@@ -1,3 +1,4 @@
+<?php if ($_SESSION['var'] == 1) : ?>
 <div class="form-group">
     <label><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('department/edit','Name');?></label>
     <input type="text" class="form-control" name="Name"  value="<?php echo htmlspecialchars($departament->name);?>" />
@@ -84,7 +85,7 @@
 			
 			     <?php include(erLhcoreClassDesign::designtpl('lhdepartament/xmpp_enabled.tpl.php'));?>
 			     
-			     <?php if ($department_xmpp_enabled == true) : ?>	
+			     <?php if (true == true) : ?>	
 			     <div class="row form-group">
 					<div class="col-xs-6">
 						<label><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('department/edit','XMPP recipients');?></label>
@@ -98,7 +99,7 @@
 				
 				<h4><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('department/edit','Inform about new chats using');?></h4>
 				
-				<?php if ($department_xmpp_enabled == true) : ?>
+				<?php if (true == true) : ?>
 				<label><input type="checkbox" name="inform_options[]" value="xmp" <?php if (in_array('xmp', $departament->inform_options_array)) : ?>checked="checked"<?php endif;?> /> <?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('department/edit','XMPP messages');?></label><br>
 				<label><input type="checkbox" name="inform_options[]" value="xmp_users" <?php if (in_array('xmp_users', $departament->inform_options_array)) : ?>checked="checked"<?php endif;?> /> <?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('department/edit','Send XMPP messages to all department operators');?></label><br>
 				<?php endif;?>
@@ -117,7 +118,7 @@
 				
 				<div class="form-group">
 				    <h4><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('department/edit','Inform then chat is accepted by one of the staff members using');?></h4>
-				    <?php if ($department_xmpp_enabled == true) : ?>
+				    <?php if (true == true) : ?>
 				    <label><input type="checkbox" name="inform_options[]" value="xmp_accepted" <?php if (in_array('xmp_accepted', $departament->inform_options_array)) : ?>checked="checked"<?php endif;?> /> <?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('department/edit','XMPP messages');?></label><br>
 				    <label><input type="checkbox" name="inform_options[]" value="xmp_users_accepted" <?php if (in_array('xmp_users_accepted', $departament->inform_options_array)) : ?>checked="checked"<?php endif;?> /> <?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('department/edit','Send XMPP messages to all department operators');?></label><br>
 				    <?php endif;?>
@@ -176,3 +177,24 @@
 			
 		</div>
 </div>
+
+<?php endif;?>
+
+<?php if ($_SESSION['var'] == 2) : ?>
+
+<div class="form-group">
+    <label><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('department/edit','Tips');?></label>
+    <input type="text" class="form-control" name="Name"  value="<?php echo htmlspecialchars($departament->tips);?>" />
+
+  <div role="tabpanel" class="tab-pane" id="design">
+			<div class="form-group">
+				<label><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('system/htmlcode','Department')?></label> <select id="ThemeID" class="form-control">
+					<option value="0"><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('system/htmlcode','Default');?></option>
+        				<?php foreach (erLhcoreClassModelDepartament::getList(array('limit' => 1000)) as $departament) : ?>
+        				   <option value="<?php echo $departament->id?>"><?php echo htmlspecialchars($departament->name)?></option>
+        				<?php endforeach; ?>
+        	    </select>
+			</div>
+		</div>
+</div>
+<?php endif;?>

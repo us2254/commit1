@@ -523,7 +523,7 @@ var lh_inst  = {
     		<?php echo $chatOptionsVariable?>.callback[name](this);    	
     	}
     },
-    
+<!--FIRST SCRIPT STARTS HERE THAT TELL WHAT FUNCTION WILL BE CALLED AND IF THE AGENT IS ONLINE OR NOT-->    
     showStatusWidget : function() {
     <?php if ($position == 'original' || $position == '') :
 	// You can style bottom HTML whatever you want. ?>
@@ -531,7 +531,7 @@ var lh_inst  = {
 	
 	<?php elseif (in_array($position, array('bottom_right','bottom_left','middle_right','middle_left'))) : ?>
 		this.removeById('lhc_status_container');	
-		
+
         var statusTEXT = '<a id="'+(this.isOnline == true ? 'online-icon' : 'offline-icon')+'" class="status-icon" href="#" onclick="return lh_inst.lh_openchatWindow()" >'+(this.isOnline ? <?php if ($theme !== false && $theme->online_text !== '') : print json_encode($theme->online_text); else : ?><?php echo json_encode(htmlspecialchars_decode(erTranslationClassLhTranslation::getInstance()->getTranslation('chat/getstatus','Live help is online...'),ENT_QUOTES))?><?php endif?> : <?php if ($theme !== false && $theme->offline_text != '') : print json_encode($theme->offline_text); else : ?><?php echo json_encode(htmlspecialchars_decode(erTranslationClassLhTranslation::getInstance()->getTranslation('chat/getstatus','Live help is offline...'),ENT_QUOTES))?><?php endif?>)+'</a>';
 
         if (!this.cssStatusWasAdded) {
@@ -560,7 +560,7 @@ var lh_inst  = {
     },
     
     timeoutInstance : null,
-
+<!--FIRST SCRIPT ENDS HERE-->
     stopCheckNewMessage : function() {
         clearTimeout(this.timeoutInstance);
     },

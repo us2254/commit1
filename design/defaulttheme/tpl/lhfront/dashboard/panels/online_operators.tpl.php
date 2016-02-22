@@ -17,15 +17,18 @@
 						<th width="30%"><i title="<?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('chat/syncadmininterface','Department');?>" class="icon-home"></i></th>
 					</tr>
 				</thead>
-				<tr ng-repeat="operator in online_op.list track by operator.id">
-					<td><a ng-show="operator.user_id != <?php echo erLhcoreClassUser::instance()->getUserID();?>" href="#" ng-click="lhc.startChatOperator(operator.user_id)" title="<?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('chat/syncadmininterface','Start chat');?>"><i class="icon-comment"></i></a> {{operator.name_support}}</td>
-					<td>
-						<div class="abbr-list" title="{{operator.lastactivity_ago}}">{{operator.lastactivity_ago}}</div>
-					</td>
-					<td>{{operator.active_chats}}</td>
-					<td><div class="abbr-list" title="{{operator.departments_names.join(', ')}}">{{operator.departments_names.join(", ")}}</div></td>
-					
-				</tr>
+
+				    <tr ng-repeat="operator in online_op.list track by operator.id">
+					    <td><a ng-show="operator.user_id != <?php echo erLhcoreClassUser::instance()->getUserID();?>" href="#" ng-click="lhc.startChatOperator(operator.user_id)" title="<?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('chat/syncadmininterface','Start chat');?>"><i class="icon-comment"></i></a> {{operator.name_support}}</td>
+					    <td>
+						    <div class="abbr-list" title="{{operator.lastactivity_ago}}">{{operator.lastactivity_ago}}</div>
+                            <div  > {{lhc.loggedUsers(operator.user_id)}}</div>
+					    </td>
+					    <td>{{operator.active_chats}}</td>
+					    <td><div class="abbr-list" title="{{operator.departments_names.join(', ')}}">{{operator.departments_names.join(", ")}}</div></td>
+
+				    </tr>
+                
 			</table>
 		</div>
 	</div>

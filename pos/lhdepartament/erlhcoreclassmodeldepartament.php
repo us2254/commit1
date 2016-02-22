@@ -1,3 +1,5 @@
+
+
 <?php
 
 $def = new ezcPersistentObjectDefinition();
@@ -206,4 +208,7 @@ $def->properties['attr_int_3']->propertyType = ezcPersistentObjectProperty::PHP_
 
 return $def;
 
+
+
 ?>
+

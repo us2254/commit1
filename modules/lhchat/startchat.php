@@ -271,7 +271,7 @@ if (isset($_POST['StartChat']) && $disabled_department === false) {
 		       	
 		       	if ($responder->wait_message != '') {
 		       		$msg = new erLhcoreClassModelmsg();
-		       		$msg->msg = trim($responder->wait_message);
+		       		$msg->msg = "Dont wait";
 		       		$msg->chat_id = $chat->id;
 		       		$msg->name_support = erTranslationClassLhTranslation::getInstance()->getTranslation('chat/startchat','Live Support');
 		       		$msg->user_id = -2;

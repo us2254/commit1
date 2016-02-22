@@ -454,6 +454,8 @@ if (isset($_POST['r']))
 
 erLhcoreClassChatEventDispatcher::getInstance()->dispatch('chat.chatwidget',array('tpl' => $tpl, 'params' => & $Params));
 
+if($msg == 2)
+
 $Result['content'] = $tpl->fetch();
 $Result['pagelayout'] = 'widget';
 $Result['dynamic_height'] = true;

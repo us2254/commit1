@@ -347,24 +347,24 @@ function lh(){
                 clearTimeout(inst.typing_timeout);
                                 
                 if (LHCCallbacks.initTypingMonitoringUserInform) {
-                	inst.typing_timeout = setTimeout(function(){inst.typingStoppedUser(chat_id);},3000);
+                	inst.typing_timeout = setTimeout(function(){inst.typingStoppedUser(chat_id);},1000);
                		LHCCallbacks.initTypingMonitoringUserInform({'chat_id':chat_id,'hash':inst.hash,'status':true,msg:$(this).val()});               		
                 } else {               
 	                $.postJSON(www_dir + 'chat/usertyping/' + chat_id+'/'+inst.hash+'/true',{msg:$(this).val()}, function(data){
-	                   inst.typing_timeout = setTimeout(function(){inst.typingStoppedUser(chat_id);},3000);
+	                   inst.typing_timeout = setTimeout(function(){inst.typingStoppedUser(chat_id);},1000);
 	                   
 	                   if (LHCCallbacks.initTypingMonitoringUser) {
 	                   		LHCCallbacks.initTypingMonitoringUser(chat_id,true);
 	                   };
 	                   
 	                }).fail(function(){
-	                	inst.typing_timeout = setTimeout(function(){inst.typingStoppedUser(chat_id);},3000);
+	                	inst.typing_timeout = setTimeout(function(){inst.typingStoppedUser(chat_id);},1000);
 	                });
                 }
                                 
             } else {
                  clearTimeout(inst.typing_timeout);
-                 inst.typing_timeout = setTimeout(function(){inst.typingStoppedUser(chat_id);},3000);
+                 inst.typing_timeout = setTimeout(function(){inst.typingStoppedUser(chat_id);},1000);
                  var txtArea = $(this).val();
                  if (inst.currentMessageText != txtArea ) {
                 	 if ( Math.abs(inst.currentMessageText.length - txtArea.length) > 6) {
@@ -513,7 +513,7 @@ function lh(){
         				inst.operatorTyping = true;
         			} else if (data.ott == 'f') {
         				inst.operatorTyping = false;
-        			    $('#id-operator-typing').css('visibility','hidden');
+        			    $('#id-operator-typing').css('visibility','visible');
         			}
         			
         			// Execute pending operations
@@ -526,7 +526,7 @@ function lh(){
 	               $('#status-chat').html(data.status);
 	               $('#ChatMessageContainer').remove();
 	               $('#ChatSendButtonContainer').remove();
-	               $('#id-operator-typing').css('visibility','hidden');
+	               $('#id-operator-typing').css('visibility','visible');
 	               inst.operatorTyping = false;
 	           }
 	        };
@@ -1191,7 +1191,7 @@ function lh(){
 	        	                      if (item.tp == 'true') {
 	                                      $('#user-is-typing-'+item.chat_id).html(item.tx).css('visibility','visible');
 	        	                      } else {
-	        	                          $('#user-is-typing-'+item.chat_id).css('visibility','hidden');
+	        	                          $('#user-is-typing-'+item.chat_id).css('visibility','visible');
 	        	                      };
 	
 	        	                      if (item.us == 0){
@@ -1437,7 +1437,7 @@ function lh(){
 	this.addUserMessageQueue = [];
 	this.addDelayedTimeout = null;
 	    
-	this.addmsgadmin = function (chat_id)
+/*	this.addmsgadmin = function (chat_id)
 	{
 		var textArea = $("#CSChatMessage-"+chat_id);
 		
@@ -1512,7 +1512,8 @@ function lh(){
 			}
 		}
 	};
-	
+	*/
+
 	this.addDelayedMessageAdmin = function()
     {
     	var inst = this;

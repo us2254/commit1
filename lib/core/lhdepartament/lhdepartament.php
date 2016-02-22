@@ -1,5 +1,6 @@
 <?php
 
+        
 class erLhcoreClassDepartament{
 
    function __construct()
@@ -388,7 +389,90 @@ class erLhcoreClassDepartament{
 
    private static $persistentSession;
 
+
+
+////////////////////
+   
+   
+   
+   
+   public static function getDepartamentsTips()
+   {
+       $db = ezcDbInstance::get();
+
+       $stmt = $db->prepare('SELECT * FROM lh_tips ORDER BY id ASC');
+       $stmt->execute();
+       $rows = $stmt->fetchAll();
+
+       return $rows;
+   }
+   /*
+   public static function sortByStatus($departments) {
+
+   $onlineDep = array();
+   $offlineDep = array();
+
+   foreach ($departments as $dep) {
+   if ($dep->is_online === true){
+   $onlineDep[] = $dep;
+   } else {
+   $offlineDep[] = $dep;
+   }
+   }
+   
+   return array_merge($onlineDep,$offlineDep);
+   }
+    */
+   public static function validateDepartmentTips(erLhcoreClassModelDepartament & $department) {
+       
+       $definition = array(
+               
+               'Tips' => new ezcInputFormDefinitionElement(
+                       ezcInputFormDefinitionElement::OPTIONAL, 'unsafe_raw'
+               ),
+
+       );
+       
+       
+       $form = new ezcInputForm( INPUT_POST, $definition );
+       $Errors = array();
+       
+       if ( !$form->hasValidData( 'Tips' ) || $form->Tips == '' )
+       {
+           $Errors[] =  erTranslationClassLhTranslation::getInstance()->getTranslation('departament/edit','Please enter a tip');
+       } else {
+           $department->tips = $form->Tips;
+       }
+       
+       
+       return $Errors;
+       
+   }
+   
+   public static function getSessionTips()
+   {
+       if ( !isset( self::$persistentSession ) )
+       {
+           self::$persistentSession = new ezcPersistentSession(
+               ezcDbInstance::get(),
+               new ezcPersistentCodeManager( './pos/lhfaq' )
+           );
+       }
+       return self::$persistentSession;
+   }
+
+
+
 }
 
+ 
 
+ 
+//////////////////////////
+ 
+
+
+
+
+ 
 ?>

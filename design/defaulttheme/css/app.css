@@ -465,7 +465,7 @@ div.message-admin+div.message-admin .msg-date,div.message-row.response+div.messa
 
 .user-is-typing,
 #id-operator-typing {
-	visibility:hidden;
+	visibility:visible;
 	font-style:italic;
     font-weight:bold;
 	line-height:140%;

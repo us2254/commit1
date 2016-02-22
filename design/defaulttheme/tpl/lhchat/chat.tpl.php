@@ -1,11 +1,13 @@
 <div class="row">
 
-	<div class="col-xs-9">
+	<div class="col-xs-12">
 		<div id="status-chat">
 		<?php if ($chat->status == erLhcoreClassModelChat::STATUS_CLOSED_CHAT) : ?>
 			<h4><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('chat/chat','This chat is closed.'); ?></h4>
 		<?php else : ?>
-			<h4><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('chat/chat','Pending confirm')?></h4>
+<br/>
+<br/>
+<br/>
 		<?php endif; ?>
 		</div>
 				
@@ -19,9 +21,7 @@
 		
 	</div>
 
-	<div class="col-xs-3 mb5">
-		<?php include(erLhcoreClassDesign::designtpl('lhchat/customer_user_settings.tpl.php'));?>
-	</div>
+
 
 </div>
 
@@ -105,7 +105,7 @@
 	
 	setTimeout(function(){
 			$('#messagesBlock').scrollTop($('#messagesBlock').prop('scrollHeight'));
-	},100);
+	},1);
 	
 	
     // Start user chat synchronization

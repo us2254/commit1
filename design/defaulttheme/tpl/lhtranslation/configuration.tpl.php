@@ -22,7 +22,7 @@
             <tr>
                 <td><?php echo $rs["id"] ?></td>
                 <td><?php  echo($rs["name"]);?></td>
-                <td nowrap><a class="btn btn-default btn-xs" href="<?php echo erLhcoreClassDesign::baseurl('departament/edit')?>/<?php echo $rs["id"] ?>"><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('department/departments','Edit Tips');?></a></td>
+                <td ><a class="btn btn-default btn-xs" href="<?php echo erLhcoreClassDesign::baseurl('departament/edit')?>/<?php echo $rs["id"] ?>"><?php echo erTranslationClassLhTranslation::getInstance()->getTranslation('department/departments','Edit Tips');?></a></td>
             </tr>
            
 			<?php }
